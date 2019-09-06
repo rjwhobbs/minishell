@@ -5,7 +5,8 @@ int		main(int ac, char *av[], char *env[])
 	char *env_var;
 
 	(void)ac;
-	env_var = param_search(env, "PATH", av[1], SEARCH_ON);
+	(void)av;
+	env_var = param_search(env, "PATH", NULL, SEARCH_VAL);
 	ft_putendl(env_var);
 	return (0);
 }

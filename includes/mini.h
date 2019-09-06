@@ -4,7 +4,8 @@
 # include <dirent.h>
 
 #define SEARCH_OFF	0
-#define SEARCH_ON	1
+#define SEARCH_ON	01
+#define SEARCH_VAL	02
 
 char		*param_search(char **env, char *env_var, char *arg, int flag);
 //char		**g_environ_vars; 

@@ -46,7 +46,7 @@ static char *path_search(char *arg, char *start, char *end)
 	return (NULL);
 }
 
-static char *path_start(char *var, char *arg)
+static char *path_start(char *var, char *arg, int flag)
 {
 	char	*start;
 	char	*end;
@@ -54,6 +54,8 @@ static char *path_start(char *var, char *arg)
 	start = ft_strchr(var, '=');
 	if (start)
 	{
+		if (flag & SEARCH_VAL)
+			return (start + 1);
 		if (!(end = ft_strchr(start + 1, ':')))
 			end = ft_strchr(start, 0);
 		return (path_search(arg, start + 1, end));
@@ -63,7 +65,7 @@ static char *path_start(char *var, char *arg)
 
 static char	*env_search(char **env, char *env_var, char *arg, int flag)
 {
-	char *var;
+	char	*var;
 
 	while (*env)
 	{
@@ -71,7 +73,7 @@ static char	*env_search(char **env, char *env_var, char *arg, int flag)
 		if (var && !flag)
 			return (var);
 		else if (var && flag)
-			return(path_start(var, arg));
+			return(path_start(var, arg, flag));
 	}
 	return (*env);
 }
@@ -85,6 +87,5 @@ char		*param_search(char **env, char *env_var, char *arg, int flag)
 
 /* The idea was to make this function do various env variable functions, hence the flags.
  * However, due to the use of strstr any var name containing a certain char might be found.
- * Also this is currently only able to specifically get the var name and it's value
- * or search the paths in PATH. It can't at this statge get the env vars value.
- * also there is no error handling */
+ * Also this is currently only able to specifically get the var name and/or it's value
+ * or search the paths in PATH. Also there is no proper error handling similar to errno */
