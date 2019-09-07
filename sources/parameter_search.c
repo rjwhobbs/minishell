@@ -87,5 +87,5 @@ char		*param_search(char **env, char *env_var, char *arg, int flag)
 
 /* The idea was to make this function do various env variable functions, hence the flags.
  * However, due to the use of strstr any var name containing a certain char might be found.
- * Also this is currently only able to specifically get the var name and/or it's value
+ * Also this is currently only able to specifically get the var name and/or it's entire value
  * or search the paths in PATH. Also there is no proper error handling similar to errno */
