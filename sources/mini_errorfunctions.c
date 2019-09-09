@@ -2,7 +2,7 @@
 
 static void	mini_terminate(void)
 {
-	ft_putendl(" A fatal error occured");
+	ft_putendl(": a fatal error occured: shell terminated.");
 	exit(EXIT_FAILURE);
 }
 

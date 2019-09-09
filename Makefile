@@ -1,8 +1,9 @@
 NAME = minishell
 
-SRC = ./sources/main.c ./sources/parameter_search.c
+SRC = ./sources/main.c ./sources/parameter_search.c ./sources/ft_strarrdup.c \
+		./sources/ft_strarrlen.c ./sources/ft_strstrdel.c
 
-OBJ = main.o parameter_search.o
+OBJ = main.o parameter_search.o ft_strarrdup.o ft_strarrlen.o ft_strstrdel.o
 
 FLAGS = -Wall -Werror -Wextra
 
