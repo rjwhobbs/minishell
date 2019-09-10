@@ -28,3 +28,4 @@ void	ft_unsetenv(char *varname)
 }
 
 //we need to double check mem leaks
+//what about the pointer itself? does it also need to be freed? how will we check for leaks?
