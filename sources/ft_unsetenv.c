@@ -17,12 +17,8 @@ void	ft_unsetenv(char *varname)
 	{
 		free(g_environ_vars[i]);
 		g_environ_vars[i] = NULL;
-		i++;
-		while (g_environ_vars[i])
-		{
+		while (g_environ_vars[++i])
 			g_environ_vars[i - 1] = g_environ_vars[i];
-			i++;
-		}
 		g_environ_vars[i - 1] = NULL;
 	}
 }
