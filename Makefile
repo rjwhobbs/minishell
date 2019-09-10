@@ -2,10 +2,10 @@ NAME = minishell
 
 SRC = ./sources/main.c ./sources/parameter_search.c ./sources/ft_strarrdup.c \
 		./sources/ft_strarrlen.c ./sources/ft_strstrdel.c ./sources/ft_strarrrealloc.c \
-		./sources/ft_env_editor.c
+		./sources/ft_setenv.c ./sources/ft_unsetenv.c ./sources/mini_errorfunctions.c
 
 OBJ = main.o parameter_search.o ft_strarrdup.o ft_strarrlen.o ft_strstrdel.o \
-		ft_strarrrealloc.o ft_env_editor.o	
+		ft_strarrrealloc.o ft_setenv.o ft_unsetenv.o mini_errorfunctions.o
 
 FLAGS = -Wall -Werror -Wextra
 

@@ -1,6 +1,7 @@
 #ifndef MINI_H
 # define MINI_H
 # include "../libft/libft.h"
+# include "mini_errors.h"
 # include <dirent.h>
 
 #define SEARCH_OFF	0
@@ -16,5 +17,6 @@ size_t		ft_strarrlen(char **arr);
 void		ft_strstrdel(char ***del_me);
 char		**ft_strarrrealloc(char **arr, char *str);
 void		ft_setenv(char *var_name, char *value, size_t varlen, size_t vallen);
+void		ft_unsetenv(char *varname);
 
 #endif

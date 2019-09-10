@@ -21,7 +21,8 @@ static char	*bin_search(char *path, char *arg, int n)
 		}
 		bins++;		
 	}
-	closedir(path_to_bin);
+	if (closedir(path_to_bin) == -1)
+		mini_error(ME_CLSERR, FATAL_ME);
 	return (NULL);
 }
 
