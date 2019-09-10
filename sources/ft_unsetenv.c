@@ -15,14 +15,15 @@ void	ft_unsetenv(char *varname)
 	}	
 	if (g_environ_vars[i])
 	{
-		ft_strdel(&g_environ_vars[i]);
+		free(g_environ_vars[i]);
+		g_environ_vars[i] = NULL;
 		i++;
 		while (g_environ_vars[i])
 		{
 			g_environ_vars[i - 1] = g_environ_vars[i];
 			i++;
 		}
-		ft_strdel(&g_environ_vars[i - 1]);
+		g_environ_vars[i - 1] = NULL;
 	}
 }
 
