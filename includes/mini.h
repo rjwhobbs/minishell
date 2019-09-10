@@ -3,6 +3,7 @@
 # include "../libft/libft.h"
 # include "mini_errors.h"
 # include <dirent.h>
+# include <limits.h>
 
 #define SEARCH_OFF	0
 #define SEARCH_ON	01
@@ -18,5 +19,6 @@ void		ft_strstrdel(char ***del_me);
 char		**ft_strarrrealloc(char **arr, char *str);
 void		ft_setenv(char *var_name, char *value, size_t varlen, size_t vallen);
 void		ft_unsetenv(char *varname);
+int			ft_cd(char *path);
 
 #endif
