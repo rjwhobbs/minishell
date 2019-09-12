@@ -7,7 +7,6 @@ void	print_env(char **ep)
 	i = 0;
 	while(ep[i])
 		ft_putendl(ep[i++]);
-	ft_putendl(".......................");
 }
 int		run_exec(char **args)
 {
@@ -25,16 +24,14 @@ int		run_exec(char **args)
 	// else if (ft_strcmp(*args, "setenv") == 0)
 	//  	return (ft_setenv(env));
 	else if (ft_strcmp(*args, "./a.out") == 0)
-	{
 	 	execve("./a.out", args, g_environ_vars);
-	}
 	else if (ft_strcmp(*args, "cd") == 0)
-	{
 		return (ft_cd(args[1]));
-	}
 	status = 1;
-	path = param_search(g_environ_vars, "PATH", args[0], SEARCH_ON);
-	path = ft_strrealloc(path, args[0]);
+	if (!(path = param_search(g_environ_vars, "PATH", args[0], SEARCH_ON)))
+		path = args[0];
+	else
+		path = ft_strrealloc(path, args[0]);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -85,8 +82,8 @@ int		main(int ac, char *av[], char *env[])
 {
 	(void)ac;
 	(void)av;
-
 	g_environ_vars = ft_strarrdup(env);
 	msh_read();
+	ft_strstrdel(&g_environ_vars);
 	return (0);
 }
