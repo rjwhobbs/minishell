@@ -62,7 +62,7 @@ static void 	checker(char **args, char *input, char *f)
 		while (*input == ' ')
 			input++;
 	}
-		args[i] = NULL;
+	args[i] = NULL;
 }
 
 char	**parser(char *input)

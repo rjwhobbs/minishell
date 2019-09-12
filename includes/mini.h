@@ -21,5 +21,6 @@ void		ft_setenv(char *var_name, char *value, size_t varlen, size_t vallen);
 void		ft_unsetenv(char *varname);
 int			ft_cd(char *path);
 char		**parser(char *input);
+void	expand(char **args);
 
 #endif
