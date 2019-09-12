@@ -24,42 +24,35 @@ static void	ft_rmchr(char *str, char c)
 static void	ft_rmchr_on_steroids(char *str)
 {
 	char *p;
-//	char c;
 	char f;
 	int i;
 
-	// if ((c == '"' || c == '\'') && str)
-	// {
-		f = 0;
-		p = str;
-		while (p && *p)
+	f = 0;
+	p = str;
+	while (p && *p)
+	{
+		i = 0;
+		while(*p && *p != '"' && *p != '\'')
+			p++;
+		if (*p == '"' || *p == '\'')
 		{
-			i = 0;
-			while(*p && *p != '"' && *p != '\'')
-				p++;
-			if (*p == '"' || *p == '\'')
-			{
-				if (f == 0)
-					f = *p;
-				else if (f == *p)
-					f = 0;
-			}
-			if (f == *p || f == 0)
-				while (p && p[i])
-				{
-					p[i] = p[i + 1];
-					i++;
-				}
-			else
-			{
-				p++;
-			}
-				
+			if (f == 0)
+				f = *p;
+			else if (f == *p)
+				f = 0;
 		}
-	//}
+		if (f == *p || f == 0)
+			while (p && p[i])
+			{
+				p[i] = p[i + 1];
+				i++;
+			}
+		else
+			p++;		
+	}
 }
 
-int main(void)
+int		main(void)
 {
 	char *input;
 	char *tmp;
@@ -96,10 +89,8 @@ int main(void)
 		i++;
 		while (*input == ' ')
 			input++;
-	}
-		
+	}		
 	free(tmp);
-
 	if (f)
 		ft_putendl("Error: quotes");
 	else
@@ -114,7 +105,5 @@ int main(void)
 			j++;
 		}
 	}
-	
 	return (0);
-
 }

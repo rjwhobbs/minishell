@@ -63,18 +63,20 @@ void	msh_read(void)
 {
 	char	*input;
 	char	**args;
+	char	*temp;
 	int		status;
-	int		gnl_status;
 
 	status = 1;
 	input = NULL;
 	while (status)
 	{
 		ft_putstr("msh > ");
-		gnl_status = get_next_line(STDIN_FILENO, &input);
-		if (gnl_status == -1)
+		if(get_next_line(STDIN_FILENO, &input) == -1)
 			mini_error("error reading stdin.", FATAL_ME);
-		args = ft_strsplit(input, ' ');
+		temp = ft_strtrim(input);
+		ft_strdel(&input);
+		input = temp;
+		args = parser(input);
 		status = run_exec(args);
 	}
 }
