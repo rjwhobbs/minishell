@@ -14,38 +14,43 @@ static void injector(char *value, char **str, char *ptr)
 	ft_strdel(&value);
 }
 
-void	expand(char **args)
+static void expand_checker(char **str)
 {
 	int		j;
-	char 	*ptr;
-	char	*word;
-	char	*value;
+	char	*ptr;
 	char	*temp;
+	char	*value;
+	char	*word;
 
+	j = 0;
+	while ((*str)[j]) //While (*args)++ was the issue
+	{
+		if ((ptr = ft_strchr(*str, '$')))
+		{
+			if (!(word = ft_strchr(ptr, ' ')))
+				word = ft_strchr(ptr, '\0');
+			temp = ft_strsub(ptr, 1, word - (ptr + 1));
+			value = param_search(g_environ_vars, temp, NULL, SEARCH_VAL);
+			if (value)
+				injector(value, str, ptr);
+			else
+				ft_putendl("Can't find string!!!!");
+			free(temp);
+		}
+		else
+			j++;
+	}
+}
+
+void	expand(char **args)
+{
 	if (args[1])
 		args++;
 	else
 		return ;
 	while (*args)
 	{
-		j = 0;
-		while ((*args)[j]) //While (*args)++ was the issue
-		{
-			if ((ptr = ft_strchr(*args, '$')))
-			{
-				if (!(word = ft_strchr(ptr, ' ')))
-					word = ft_strchr(ptr, '\0');
-				temp = ft_strsub(ptr, 1, word - (ptr + 1));
-				value = param_search(g_environ_vars, temp, NULL, SEARCH_VAL);
-				if (value)
-					injector(value, &*args, ptr);
-				else
-					ft_putendl("Can't find string!!!!");
-				free(temp);
-			}
-			else
-				j++;
-		}
+		expand_checker(args);
 		args++;
 	}
 }

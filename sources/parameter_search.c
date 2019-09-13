@@ -71,7 +71,7 @@ static char	*env_search(char **env, char *env_var, char *arg, int flag)
 	i = 0;
 	while (env[i])
 	{
-		if (ft_strncmp(env[i], env_var, ft_strlen(env_var)) == 0)
+		if (ft_strncmp(env[i], env_var, ft_strlen(env_var)) == 0) //use strnstr here rather?
 		{
 			if (!flag)
 				return (ft_strdup(env[i]));
