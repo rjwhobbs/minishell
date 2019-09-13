@@ -25,7 +25,7 @@ static void expand_checker(char **str)
 	j = 0;
 	while ((*str)[j]) //While (*args)++ was the issue
 	{
-		if ((ptr = ft_strchr(*str, '$')))
+		if ((ptr = ft_strchr(&(*str)[j], '$')))
 		{
 			if (!(word = ft_strchr(ptr, ' ')))
 				word = ft_strchr(ptr, '\0');
@@ -36,6 +36,7 @@ static void expand_checker(char **str)
 			else
 				ft_putendl("Can't find string!!!!");
 			free(temp);
+			j = word - *str;
 		}
 		else
 			j++;

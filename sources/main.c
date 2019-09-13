@@ -74,7 +74,7 @@ void	msh_read(void)
 		ft_strdel(&input);
 		input = temp;
 		args = parser(input);
-		//free input here;
+		free(input);
 		expand(args);
 		status = run_exec(args);
 		//free args here
