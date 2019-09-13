@@ -62,7 +62,7 @@ void	msh_read(void)
 	char	**args;
 	char	*temp;
 	int		status;
-	char	**temp_arr;
+	//char	**temp_arr;
 
 	status = 1;
 	input = NULL;
@@ -75,10 +75,10 @@ void	msh_read(void)
 		ft_strdel(&input);
 		input = temp;
 		args = parser(input);
-		temp_arr = args;
+		//temp_arr = args;
 		//free input here;
 		expand(args);
-		print_env(temp_arr);
+		//print_env(temp_arr);
 		status = run_exec(args);
 		//free args here
 	}

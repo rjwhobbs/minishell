@@ -34,10 +34,10 @@ void	expand(char **args)
 		j = 0;
 		while (args[i][j]) // It seems that while (*args)++ was the issue?
 		{
-			ft_putendl("XXX");
+			//ft_putendl("XXX");
 			if ((ptr = ft_strchr(args[i], '$')))
 			{
-				ft_putendl("ZZZ");
+				//ft_putendl("ZZZ");
 				if (!(word = ft_strchr(ptr, ' ')))
 					word = ft_strchr(ptr, '\0');
 				//ft_putendl(*args);
