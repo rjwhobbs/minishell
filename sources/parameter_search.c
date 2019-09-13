@@ -66,7 +66,6 @@ static char *path_start(char *var, char *arg, int flag)
 
 static char	*env_search(char **env, char *env_var, char *arg, int flag)
 {
-	//char	*var;
 	int		i;
 
 	i = 0;
@@ -78,11 +77,6 @@ static char	*env_search(char **env, char *env_var, char *arg, int flag)
 				return (ft_strdup(env[i]));
 			else if (flag)
 				return (path_start(env[i], arg, flag));
-		//var = ft_strstr(*env++, env_var);
-		//if (var && !flag)
-		//	return(var);
-		// else if (var && flag)
-		// 	return(path_start(var, arg, flag));
 		}
 		i++;
 	}
