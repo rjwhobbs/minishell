@@ -56,7 +56,7 @@ static char *path_start(char *var, char *arg, int flag)
 	if (start)
 	{
 		if (flag & SEARCH_VAL)
-			return (start + 1);
+			return (ft_strdup(start + 1));
 		if (!(end = ft_strchr(start + 1, ':')))
 			end = ft_strchr(start, 0);
 		return (path_search(arg, start + 1, end));

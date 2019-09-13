@@ -12,13 +12,14 @@ static void injector(char *value, char **str, char *ptr)
 		ft_strcat(new, ptr);
 	ft_strdel(str);
 	*str = ft_strdup(new);
-	//ft_putstr(new);
-	//ft_putendl("$");
+	// ft_putstr(new);
+	// ft_putendl("$");
 }
 
 void	expand(char **args)
 {
 	int 	i;
+	int		j;
 	char 	*ptr;
 	char	*word;
 	char	*value;
@@ -27,13 +28,16 @@ void	expand(char **args)
 
 	i = 0;
 	args++;
-	while (*args)
+	while (args[i])
 	{
 		//ft_putendl(*args);
-		while (**args)
+		j = 0;
+		while (args[i][j]) // It seems that while (*args)++ was the issue?
 		{
-			if ((ptr = ft_strchr(*args, '$')))
+			ft_putendl("XXX");
+			if ((ptr = ft_strchr(args[i], '$')))
 			{
+				ft_putendl("ZZZ");
 				if (!(word = ft_strchr(ptr, ' ')))
 					word = ft_strchr(ptr, '\0');
 				//ft_putendl(*args);
@@ -41,8 +45,8 @@ void	expand(char **args)
 				value = param_search(g_environ_vars, temp, NULL, SEARCH_VAL);
 				if (value)
 				{
-					value = ft_strdup(value);
-					injector(value, &*args, ptr);
+					//value = ft_strdup(value);
+					injector(value, &args[i], ptr);
 				}
 				else
 					ft_putendl("Can't find string!!!!");
@@ -51,10 +55,9 @@ void	expand(char **args)
 				//*args = word;
 			}
 			else
-				(*args)++;
-			
+				j++;
 		}
-		args++;
+		i++;
 	}
 	//ft_putendl(value);
 }
