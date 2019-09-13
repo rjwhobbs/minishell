@@ -15,7 +15,7 @@ static void injector(char *value, char **str, char *ptr)
 		ft_strcat(new, ptr);
 	ft_strdel(str);
 	*str = ft_strdup(new);
-	ft_strdel(&value);
+	ft_strdel(&value); //ft_strdel is somehow protected against freeing unallocated mem? HOW!!!
 }
 
 static void expand_checker(char **str)
