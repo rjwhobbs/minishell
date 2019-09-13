@@ -3,7 +3,7 @@
 static void injector(char *value, char **str, char *ptr)
 {
 	char new[ARG_MAX];
-	char	*wordend;
+	//char	*wordend;
 
 	ft_bzero(new, ARG_MAX);
 	ft_memcpy(new, *str, ptr - *str);
@@ -11,8 +11,10 @@ static void injector(char *value, char **str, char *ptr)
 		ft_strcat(new, value);
 	else
 	{
-		if (!(wordend = ft_strchr(ptr, ' ')))
-			wordend = ft_strchr(ptr, '\0');
+		if (!ptr[1])
+			ft_strcat(new,"$");	
+		// if (!(wordend = ft_strchr(ptr, ' ')))
+		// 	wordend = ft_strchr(ptr, '\0');
 		// if ((wordend - ptr) == 1)
 		// 	ft_strcat(new,"$");		
 	}
@@ -38,7 +40,7 @@ static void expand_checker(char **str)
 		{
 			if (!(word = ft_strchr(ptr, ' ')))
 				word = ft_strchr(ptr, '\0');
-			j = word - ptr;
+			j = (ptr - *str) + 1;
 			// ft_putnbr(j);
 			// ft_nl();
 			temp = ft_strsub(ptr, 1, word - (ptr + 1));
