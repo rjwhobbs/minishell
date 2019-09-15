@@ -12,10 +12,7 @@ static void injector(char *value, char **str, char *ptr)
 	else
 	{
 		if (!ptr[1])
-		{
-			ft_putendl(ptr);
 			ft_strcat(new,"$");	
-		}
 	}
 	if ((check = ft_strchr(ptr, ' ')))
 		ft_strcat(new, check);
