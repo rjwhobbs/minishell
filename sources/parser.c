@@ -1,13 +1,13 @@
 #include "../includes/mini.h"
 
-static void	ft_rmchr_on_steroids(char *str)
+static void	ft_rmchr_on_steroids(char *p)
 {
-	char *p;
+	//char *p;
 	char f;
 	int i;
 
 	f = 0;
-	p = str;
+	//p = str;
 	while (p && *p)
 	{
 		i = 0;
@@ -86,6 +86,8 @@ char	**parser(char *input)
 
 	f = 0;
 	i = 0;
+	if (!input || !*input)
+		return (NULL);
 	if (!(args = (char**)malloc(sizeof(char*) * (ARG_MAX))))
 		mini_error(ME_MEMERR, NONFATAL_ME);
 	checker(args, input, &f);

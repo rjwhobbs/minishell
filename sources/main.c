@@ -8,12 +8,15 @@ void	print_env(char **ep)
 	while(ep[i])
 		ft_putendl(ep[i++]);
 }
+
 int		run_exec(char **args)
 {
 	char	*path;
 	pid_t	pid;
 	int		status;
 
+	if (!args || !*args || !**args)
+		return (1);
 	if (ft_strcmp(*args, "exit") == 0)
 		return (0);
 	else if (ft_strcmp(*args, "env") == 0)
@@ -35,14 +38,9 @@ int		run_exec(char **args)
 	pid = fork();
 	if (pid == 0)
 	{
-		if ((ft_strcmp(*args, "./print_mem") == 0))
-			execve("./print_mem", args, g_environ_vars);
-		else
-		{
-			execve(path, args, g_environ_vars);
-			ft_putstr("Error opening: ");
-			ft_putendl(*args);
-		}
+		execve(path, args, g_environ_vars);
+		ft_putstr("Error opening: ");
+		ft_putendl(*args);
 		return (0);
 	}
 	//else if (pid > 0)
