@@ -43,6 +43,17 @@ static void		qoute_checker(char **input, char *f)
 	}
 }
 
+static void		tilde_expander(char **str)
+{
+	char *home;
+	char *temp;
+
+	home = param_search(g_environ_vars, "HOME", NULL, SEARCH_VAL);
+	temp = ft_strrealloc(home, &(*str)[1]);
+	ft_strdel(str);
+	*str = temp;
+}
+
 static void 	checker(char **args, char *input, char *f)
 {
 	char 	*ip;
@@ -57,6 +68,8 @@ static void 	checker(char **args, char *input, char *f)
 		op = input;
 		if (!(args[i] = ft_strsub(ip, 0, op - ip)))
 			mini_error(ME_MEMERR, NONFATAL_ME);
+		if (args[i][0] == '~' && (!args[i][1] || args[i][1] == '/'))
+			tilde_expander(&args[i]);
 		ft_rmchr_on_steroids(args[i]);
 		i++;
 		while (*input == ' ')
@@ -78,7 +91,7 @@ char	**parser(char *input)
 	checker(args, input, &f);
 	if (f)
 	{
-		ft_putendl("Error: quotes");
+		ft_putendl("Error: unmatched qoutes.");
 		ft_strstrdel(&args);
 		return (NULL);
 	}
