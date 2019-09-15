@@ -26,8 +26,6 @@ int		run_exec(char **args)
 	}
 	// else if (ft_strcmp(*args, "setenv") == 0)
 	//  	return (ft_setenv(env));
-	else if (ft_strcmp(*args, "./a.out") == 0)
-	 	execve("./a.out", args, g_environ_vars);
 	else if (ft_strcmp(*args, "cd") == 0)
 		return (ft_cd(args[1]));
 	status = 1;
@@ -43,7 +41,6 @@ int		run_exec(char **args)
 		ft_putendl(*args);
 		return (0);
 	}
-	//else if (pid > 0)
 	while (status)
 	{
 		waitpid(pid, &status, WUNTRACED);
