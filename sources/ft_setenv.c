@@ -28,7 +28,7 @@ void			ft_setenv(char *var_name, char *value, size_t varlen, size_t vallen)
 	i = 0;
 	while (g_environ_vars[i])
 	{
-		if (ft_strncmp(g_environ_vars[i], var_name, varlen) == 0)
+		if (ft_strncmp(g_environ_vars[i], var_name, varlen) == 0 && (g_environ_vars[i][varlen] == '='))
 			break ;
 		i++;
 	}

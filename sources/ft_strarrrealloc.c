@@ -15,7 +15,7 @@ char	**ft_strarrrealloc(char **arr, char *str)
 		new[i] = ft_strdup(arr[i]);
 		i++;
 	}
-	new[i] = str;
+	new[i] = ft_strdup(str);
 	ft_strstrdel(&arr);
 	return (new);
 }
