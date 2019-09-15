@@ -55,7 +55,7 @@ void	msh_read(void)
 {
 	char	*input;
 	char	**args;
-	char	*temp;
+	char	*input_trimed;
 	int		status;
 
 	status = 1;
@@ -65,14 +65,14 @@ void	msh_read(void)
 		ft_putstr("msh > ");
 		if(get_next_line(STDIN_FILENO, &input) == -1)
 			mini_error("error reading stdin.", FATAL_ME);
-		temp = ft_strtrim(input);
+		input_trimed= ft_strtrim(input);
 		ft_strdel(&input);
-		input = temp;
-		args = parser(input);
-		free(input);
+		args = parser(input_trimed);
+		ft_strdel(&input_trimed);
 		expand(args);
 		status = run_exec(args);
-		//free args here
+		if (args)
+			ft_strstrdel(&args);
 	}
 }
 
