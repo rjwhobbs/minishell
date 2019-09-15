@@ -3,16 +3,22 @@
 static void injector(char *value, char **str, char *ptr)
 {
 	char new[ARG_MAX];
+	char *check;
 
 	ft_bzero(new, ARG_MAX);
 	ft_memcpy(new, *str, ptr - *str);
 	if (value)
 		ft_strcat(new, value);
 	else
+	{
 		if (!ptr[1])
+		{
+			ft_putendl(ptr);
 			ft_strcat(new,"$");	
-	if ((ptr = ft_strchr(ptr, ' ')))
-		ft_strcat(new, ptr);
+		}
+	}
+	if ((check = ft_strchr(ptr, ' ')))
+		ft_strcat(new, check);
 	ft_strdel(str);
 	*str = ft_strdup(new);
 	ft_strdel(&value); //ft_strdel is somehow protected against freeing unallocated mem? HOW!!!
@@ -27,9 +33,10 @@ static void expand_checker(char **str)
 	char	*word;
 
 	j = 0;
+	ptr = NULL;
 	while ((*str)[j]) //While (*args)++ was the issue
 	{
-		if ((ptr = ft_strchr(&(*str)[j], '$')))
+		if ((ptr = ft_strchr(&(*str)[j], '$')) && (*str)[0])
 		{
 			if (!(word = ft_strchr(ptr, ' ')))
 				word = ft_strchr(ptr, '\0');
@@ -37,7 +44,7 @@ static void expand_checker(char **str)
 			temp = ft_strsub(ptr, 1, word - (ptr + 1));
 			value = param_search(g_environ_vars, temp, NULL, SEARCH_VAL);
 			injector(value, str, ptr);
-			free(temp);
+			ft_strdel(&temp);
 		}
 		else
 			j++;
