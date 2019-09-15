@@ -64,8 +64,8 @@ void	msh_read(void)
 	{
 		ft_putstr("msh > ");
 		if(get_next_line(STDIN_FILENO, &input) == -1)
-			mini_error("error reading stdin.", FATAL_ME);
-		input_trimed= ft_strtrim(input);
+			mini_error("error reading stdin.", NONFATAL_ME);
+		input_trimed = ft_strtrim(input);
 		ft_strdel(&input);
 		args = parser(input_trimed);
 		ft_strdel(&input_trimed);

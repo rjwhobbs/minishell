@@ -64,14 +64,16 @@ static char *path_start(char *var, char *arg, int flag)
 	return (NULL);
 }
 
-static char	*env_search(char **env, char *env_var, char *arg, int flag)
+static char	*env_search(char **env, char *env_var, char *arg, int flag) // This function looks redundant.
 {
 	int		i;
+	size_t	len;
 
 	i = 0;
 	while (env[i])
 	{
-		if (ft_strncmp(env[i], env_var, ft_strlen(env_var)) == 0) //use strnstr here rather?
+		len = ft_strlen(env_var);
+		if (ft_strncmp(env[i], env_var, len) == 0 && env[i][len] == '=') 
 		{
 			if (!flag)
 				return (ft_strdup(env[i]));

@@ -12,6 +12,7 @@
 #define ME_MEMERR	"error allocating memory"
 #define ME_QOUTERR	"unmatched qoutes"
 
-void		mini_error(char *err_name, int flag);
+void 		mini_arr_error(char *err, char ***arrdel, int f);
+void        mini_error(char *err, int f);
 
 #endif

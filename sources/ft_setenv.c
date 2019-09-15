@@ -24,7 +24,7 @@ void			ft_setenv(char *var_name, char *value, size_t varlen, size_t vallen)
 	int		i;
 
 	if (!var_name || !value || !*var_name || !*value)
-		mini_error("Incorrect setenv format", FATAL_ME);
+		mini_error("Incorrect setenv format", NONFATAL_ME);
 	i = 0;
 	while (g_environ_vars[i])
 	{

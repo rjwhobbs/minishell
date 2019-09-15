@@ -67,7 +67,10 @@ static void 	checker(char **args, char *input, char *f)
 		qoute_checker(&input, f);
 		op = input;
 		if (!(args[i] = ft_strsub(ip, 0, op - ip)))
-			mini_error(ME_MEMERR, NONFATAL_ME);
+		{
+			mini_arr_error(ME_MEMERR, &args, NONFATAL_ME);
+			return ;
+		}
 		if (args[i][0] == '~' && (!args[i][1] || args[i][1] == '/'))
 			tilde_expander(&args[i]);
 		ft_rmchr_on_steroids(args[i]);
@@ -89,12 +92,16 @@ char	**parser(char *input)
 	if (!input || !*input)
 		return (NULL);
 	if (!(args = (char**)malloc(sizeof(char*) * (ARG_MAX))))
+	{
 		mini_error(ME_MEMERR, NONFATAL_ME);
+		return (NULL);
+	}
 	checker(args, input, &f);
 	if (f)
 	{
 		ft_putendl("Error: unmatched qoutes.");
-		ft_strstrdel(&args);
+		if(args && *args)
+			ft_strstrdel(&args);
 		return (NULL);
 	}
 	return (args);
