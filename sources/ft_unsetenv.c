@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_unsetenv.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wasahmed <wasahmed@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/16 14:55:10 by wasahmed          #+#    #+#             */
+/*   Updated: 2019/09/16 15:28:59 by wasahmed         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/mini.h"
 
 void	ft_unsetenv(char *varname)
@@ -7,21 +19,27 @@ void	ft_unsetenv(char *varname)
 
 	i = 0;
 	vlen = ft_strlen(varname);
-	while (g_environ_vars[i])
+	while (g_env[i])
 	{
-		if (ft_strncmp(g_environ_vars[i], varname, vlen) == 0 && g_environ_vars[i][vlen] == '=')
+		if (!ft_strncmp(g_env[i], varname, vlen) && g_env[i][vlen] == '=')
 			break ;
 		i++;
-	}	
-	if (g_environ_vars[i])
+	}
+	if (g_env[i])
 	{
-		free(g_environ_vars[i]);
-		g_environ_vars[i] = NULL;
-		while (g_environ_vars[++i])
-			g_environ_vars[i - 1] = g_environ_vars[i];
-		g_environ_vars[i - 1] = NULL;
+		free(g_env[i]);
+		g_env[i] = NULL;
+		while (g_env[++i])
+			g_env[i - 1] = g_env[i];
+		g_env[i - 1] = NULL;
 	}
 }
 
-//we need to double check mem leaks
-//what about the pointer itself? does it also need to be freed? how will we check for leaks?
+int		unsetenv_checker(char **args)
+{
+	if (args[1])
+		ft_unsetenv(args[1]);
+	else
+		mini_error("No arguments.", 0);
+	return (1);
+}

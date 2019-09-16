@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_setenv.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wasahmed <wasahmed@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/16 14:47:32 by wasahmed          #+#    #+#             */
+/*   Updated: 2019/09/16 15:29:31 by wasahmed         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/mini.h"
 
-static void		editor(char *value, size_t vallen, char *newstr, int index)
+static void	editor(char *value, size_t vallen, char *newstr, int index)
 {
 	char	*original_val;
 	char	*temp;
 
-	original_val = ft_strchr(g_environ_vars[index], '=') + 1; //what if the envar has incorrect format
+	original_val = ft_strchr(g_env[index], '=') + 1;
 	if (!original_val)
 		return ;
 	else if (ft_strlen(original_val) >= vallen)
@@ -13,34 +25,40 @@ static void		editor(char *value, size_t vallen, char *newstr, int index)
 	else
 	{
 		temp = ft_strdup(newstr);
-		free(g_environ_vars[index]);
-		g_environ_vars[index] = temp;
+		free(g_env[index]);
+		g_env[index] = temp;
 	}
 }
 
-void			ft_setenv(char *var_name, char *value, size_t varlen, size_t vallen)
+void		ft_setenv(char *var, char *value, size_t varlen, size_t vallen)
 {
-	char 	newstr[varlen + vallen + 2];
+	char	newstr[varlen + vallen + 2];
 	int		i;
 
-	if (!var_name || !value || !*var_name || !*value)
+	if (!var || !value || !*var || !*value)
 		mini_error("Incorrect setenv format", NONFATAL_ME);
 	i = 0;
-	while (g_environ_vars[i])
+	while (g_env[i])
 	{
-		if (ft_strncmp(g_environ_vars[i], var_name, varlen) == 0 && (g_environ_vars[i][varlen] == '='))
+		if (!ft_strncmp(g_env[i], var, varlen) && (g_env[i][varlen] == '='))
 			break ;
 		i++;
 	}
 	ft_bzero(newstr, sizeof(newstr));
-	ft_strcat(newstr, var_name);
+	ft_strcat(newstr, var);
 	ft_strcat(newstr, "=");
 	ft_strcat(newstr, value);
-	if (g_environ_vars[i])
+	if (g_env[i])
 		editor(value, vallen, newstr, i);
 	else
-		g_environ_vars = ft_strarrrealloc(g_environ_vars, newstr);
+		g_env = ft_strarrrealloc(g_env, newstr);
 }
 
-// Need to handle no value and no varname
-//void	ft_unsetenv()
+int			setenv_checker(char **args)
+{
+	if (ft_strarrlen(args) != 3)
+		mini_error("Incorrect amount of arguments", 0);
+	else
+		ft_setenv(args[1], args[2], ft_strlen(args[1]), ft_strlen(args[2]));
+	return (1);
+}

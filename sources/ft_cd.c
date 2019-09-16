@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wasahmed <wasahmed@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/16 14:35:19 by wasahmed          #+#    #+#             */
+/*   Updated: 2019/09/16 14:42:59 by wasahmed         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/mini.h"
 
 int		ft_cd(char *path)
@@ -9,12 +21,12 @@ int		ft_cd(char *path)
 	freeme = 0;
 	if (!path)
 	{
-		path = param_search(g_environ_vars, "HOME", NULL, SEARCH_VAL);
+		path = param_search(g_env, "HOME", NULL, SEARCH_VAL);
 		freeme = 1;
 	}
 	else if (ft_strcmp(path, "-") == 0)
 	{
-		path = param_search(g_environ_vars, "OLDPWD", NULL, SEARCH_VAL);
+		path = param_search(g_env, "OLDPWD", NULL, SEARCH_VAL);
 		freeme = 1;
 	}
 	getcwd(oldpwd, PATH_MAX);
