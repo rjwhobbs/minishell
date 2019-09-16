@@ -1,17 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wasahmed <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/16 15:24:28 by wasahmed          #+#    #+#             */
+/*   Updated: 2019/09/16 15:24:33 by wasahmed         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/mini.h"
 
 static void	ft_rmchr_on_steroids(char *p)
 {
-	//char *p;
-	char f;
-	int i;
+	char	f;
+	int		i;
 
 	f = 0;
-	//p = str;
 	while (p && *p)
 	{
 		i = 0;
-		while(*p && *p != '"' && *p != '\'')
+		while (*p && *p != '"' && *p != '\'')
 			p++;
 		if (*p == '"' || *p == '\'')
 		{
@@ -24,14 +34,14 @@ static void	ft_rmchr_on_steroids(char *p)
 			while (p && p[i++])
 				p[i - 1] = p[i];
 		else
-			p++;		
+			p++;
 	}
 }
 
-static void		qoute_checker(char **input, char *f)
+static void	qoute_checker(char **input, char *f)
 {
 	while (**input && !(ft_isspace(**input) && *f == 0))
-	{		
+	{
 		if (**input == '\'' || **input == '"')
 		{
 			if (*f == **input)
@@ -43,21 +53,21 @@ static void		qoute_checker(char **input, char *f)
 	}
 }
 
-static void		tilde_expander(char **str)
+static void	tilde_expander(char **str)
 {
 	char *home;
 	char *temp;
 
-	home = param_search(g_environ_vars, "HOME", NULL, SEARCH_VAL);
+	home = param_search(g_env, "HOME", NULL, SEARCH_VAL);
 	temp = ft_strrealloc(home, &(*str)[1]);
 	ft_strdel(str);
 	*str = temp;
 }
 
-static void 	checker(char **args, char *input, char *f)
+static void	checker(char **args, char *input, char *f)
 {
-	char 	*ip;
-	char 	*op;
+	char	*ip;
+	char	*op;
 	int		i;
 
 	i = 0;
@@ -81,17 +91,16 @@ static void 	checker(char **args, char *input, char *f)
 	args[i] = NULL;
 }
 
-char	**parser(char *input)
+char		**parser(char *input)
 {
-	char **args;
-	char f;
-	int i;
+	char	**args;
+	char	f;
+	int		i;
 
 	f = 0;
 	i = 0;
 	if (!input || !*input)
 		return (NULL);
-	// white space deleter here;
 	if (!(args = (char**)malloc(sizeof(char*) * (ARG_MAX))))
 	{
 		mini_error(ME_MEMERR, NONFATAL_ME);
@@ -101,7 +110,7 @@ char	**parser(char *input)
 	if (f)
 	{
 		ft_putendl("Error: unmatched qoutes.");
-		if(args && *args)
+		if (args && *args)
 			ft_strstrdel(&args);
 		return (NULL);
 	}

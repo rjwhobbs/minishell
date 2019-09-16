@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   print_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wasahmed <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/16 15:30:56 by wasahmed          #+#    #+#             */
-/*   Updated: 2019/09/16 15:31:00 by wasahmed         ###   ########.fr       */
+/*   Created: 2019/09/16 15:25:14 by wasahmed          #+#    #+#             */
+/*   Updated: 2019/09/16 15:25:19 by wasahmed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/mini.h"
 
-int	ft_isspace(int c)
+int	print_env(char **ep)
 {
-	if (c == ' ' || (c >= 9 && c <= 13))
-		return (1);
-	return (0);
+	int	i;
+
+	i = 0;
+	while (ep[i])
+		ft_putendl(ep[i++]);
+	return (1);
 }

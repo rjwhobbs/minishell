@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parameter_search.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wasahmed <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/16 15:18:23 by wasahmed          #+#    #+#             */
+/*   Updated: 2019/09/16 15:18:29 by wasahmed         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/mini.h"
 
 static char	*bin_search(char *path, char *arg, int n)
 {
 	struct dirent	*bins;
-	DIR 			*path_to_bin;
+	DIR				*path_to_bin;
 	char			location[n + 2];
 
 	ft_strncpy(location, path, n);
@@ -17,16 +29,16 @@ static char	*bin_search(char *path, char *arg, int n)
 		if (ft_strcmp(bins->d_name, arg) == 0)
 		{
 			closedir(path_to_bin);
-			return(ft_strdup(location));
+			return (ft_strdup(location));
 		}
-		bins++;		
+		bins++;
 	}
 	if (closedir(path_to_bin) == -1)
 		mini_error(ME_CLSERR, FATAL_ME);
 	return (NULL);
 }
 
-static char *path_search(char *arg, char *start, char *end)
+static char	*path_search(char *arg, char *start, char *end)
 {
 	char	*path;
 
@@ -42,12 +54,12 @@ static char *path_search(char *arg, char *start, char *end)
 			end = ft_strchr(start, 0);
 		path = bin_search(start, arg, end - start);
 		if (path)
-			return(path);
+			return (path);
 	}
 	return (NULL);
 }
 
-static char *path_start(char *var, char *arg, int flag)
+static char	*path_start(char *var, char *arg, int flag)
 {
 	char	*start;
 	char	*end;
@@ -64,7 +76,7 @@ static char *path_start(char *var, char *arg, int flag)
 	return (NULL);
 }
 
-static char	*env_search(char **env, char *env_var, char *arg, int flag) // This function looks redundant.
+static char	*env_search(char **env, char *env_var, char *arg, int flag)
 {
 	int		i;
 	int		len;
@@ -91,8 +103,3 @@ char		*param_search(char **env, char *env_var, char *arg, int flag)
 		return (NULL);
 	return (env_search(env, env_var, arg, flag));
 }
-
-/* The idea was to make this function do various env variable functions, hence the flags.
- * However, due to the use of strstr any var name containing a certain char might be found.
- * Also this is currently only able to specifically get the var name and/or it's entire value
- * or search the paths in PATH. Also there is no proper error handling similar to errno */

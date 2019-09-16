@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wasahmed <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/16 15:30:56 by wasahmed          #+#    #+#             */
-/*   Updated: 2019/09/16 15:31:00 by wasahmed         ###   ########.fr       */
+/*   Created: 2019/09/16 15:28:27 by wasahmed          #+#    #+#             */
+/*   Updated: 2019/09/16 15:28:31 by wasahmed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/mini.h"
 
-int	ft_isspace(int c)
+int				ft_echo(char **args)
 {
-	if (c == ' ' || (c >= 9 && c <= 13))
-		return (1);
-	return (0);
+	args++;
+	while (*args)
+	{
+		ft_putstr(*args++);
+		if (*args)
+			ft_putchar(' ');
+	}
+	ft_nl();
+	return (1);
 }

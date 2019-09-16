@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wasahmed <wasahmed@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/16 14:34:04 by wasahmed          #+#    #+#             */
+/*   Updated: 2019/09/16 14:42:45 by wasahmed         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/mini.h"
 
-static void injector(char *value, char **str, char *ptr)
+static void	injector(char *value, char **str, char *ptr)
 {
 	char new[ARG_MAX];
 	char *check;
@@ -12,16 +24,16 @@ static void injector(char *value, char **str, char *ptr)
 	else
 	{
 		if (!ptr[1])
-			ft_strcat(new,"$");	
+			ft_strcat(new, "$");
 	}
 	if ((check = ft_strchr(ptr, ' ')))
 		ft_strcat(new, check);
 	ft_strdel(str);
 	*str = ft_strdup(new);
-	ft_strdel(&value); //ft_strdel is somehow protected against freeing unallocated mem? HOW!!!
+	ft_strdel(&value);
 }
 
-static void expand_checker(char **str)
+static void	expand_checker(char **str)
 {
 	int		j;
 	char	*ptr;
@@ -31,7 +43,7 @@ static void expand_checker(char **str)
 
 	j = 0;
 	ptr = NULL;
-	while ((*str)[j]) //While (*args)++ was the issue
+	while ((*str)[j])
 	{
 		if ((ptr = ft_strchr(&(*str)[j], '$')) && (*str)[0])
 		{
@@ -39,7 +51,7 @@ static void expand_checker(char **str)
 				word = ft_strchr(ptr, '\0');
 			j = (ptr - *str) + 1;
 			temp = ft_strsub(ptr, 1, word - (ptr + 1));
-			value = param_search(g_environ_vars, temp, NULL, SEARCH_VAL);
+			value = param_search(g_env, temp, NULL, SEARCH_VAL);
 			injector(value, str, ptr);
 			ft_strdel(&temp);
 		}
@@ -48,7 +60,7 @@ static void expand_checker(char **str)
 	}
 }
 
-void	expand(char **args)
+void		expand(char **args)
 {
 	if (!args || !*args || !**args)
 		return ;

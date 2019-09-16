@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strarrdup.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wasahmed <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/16 14:25:31 by wasahmed          #+#    #+#             */
+/*   Updated: 2019/09/16 14:28:39 by wasahmed         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/mini.h"
 
 char	**ft_strarrdup(char **arr)
@@ -12,7 +24,7 @@ char	**ft_strarrdup(char **arr)
 		return (NULL);
 	dup_z = dup;
 	dup[len] = NULL;
-	while(len--)
+	while (len--)
 		*dup++ = ft_strdup(*arr++);
 	return (dup_z);
 }
