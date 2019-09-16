@@ -10,7 +10,7 @@
 #define SEARCH_VAL	02
 
 char		**g_environ_vars;
-//extern char **environ;
+extern char **environ;
 
 char		*param_search(char **env, char *env_var, char *arg, int flag);
 char		**ft_strarrdup(char **arr);
@@ -21,6 +21,6 @@ void		ft_setenv(char *var_name, char *value, size_t varlen, size_t vallen);
 void		ft_unsetenv(char *varname);
 int			ft_cd(char *path);
 char		**parser(char *input);
-void	expand(char **args);
+void		expand(char **args);
 
 #endif

@@ -9,7 +9,7 @@ void	ft_unsetenv(char *varname)
 	vlen = ft_strlen(varname);
 	while (g_environ_vars[i])
 	{
-		if (ft_strncmp(g_environ_vars[i], varname, vlen) == 0)
+		if (ft_strncmp(g_environ_vars[i], varname, vlen) == 0 && g_environ_vars[i][vlen] == '=')
 			break ;
 		i++;
 	}	

@@ -1,12 +1,13 @@
 #include "../includes/mini.h"
 
-static void	print_env(char **ep)
+static int	print_env(char **ep)
 {
 	int	i;
 
 	i = 0;
 	while(ep[i])
 		ft_putendl(ep[i++]);
+	return (1);
 }
 
 static int		run(char **args, int status)
@@ -35,6 +36,24 @@ static int		run(char **args, int status)
 	return (1);
 }
 
+static int		unsetenv_checker(char **args)
+{
+	if (args[1])
+		ft_unsetenv(args[1]);
+	else
+		mini_error("No arguments.", 0);
+	return (1);
+}
+
+static int		setenv_checker(char **args)
+{
+	if (ft_strarrlen(args) != 3)
+		mini_error("Incorrect amount of arguments", 0);
+	else
+		ft_setenv(args[1], args[2], ft_strlen(args[1]), ft_strlen(args[2]));
+	return (1);
+}
+
 static int		run_exec(char **args)
 {
 	int		status;
@@ -45,14 +64,13 @@ static int		run_exec(char **args)
 	if (ft_strcmp(*args, "exit") == 0)
 		return (0);
 	else if (ft_strcmp(*args, "env") == 0)
-	{
-		print_env(g_environ_vars);
-		return (1);
-	}
-	// else if (ft_strcmp(*args, "setenv") == 0)
-	//  	return (ft_setenv(env));
+		return(print_env(g_environ_vars));
+	else if (ft_strcmp(*args, "setenv") == 0)
+	 	return (setenv_checker(args));
 	else if (ft_strcmp(*args, "cd") == 0)
 		return (ft_cd(args[1]));
+	else if (ft_strcmp(*args, "unsetenv") == 0)
+		return(unsetenv_checker(args));
 	else
 		return (run(args, status));
 }
@@ -86,7 +104,10 @@ int		main(int ac, char *av[], char *env[])
 {
 	(void)ac;
 	(void)av;
-	g_environ_vars = ft_strarrdup(env);
+	if (!env)
+		g_environ_vars = ft_strarrdup(environ); // Lets test this
+	else
+		g_environ_vars = ft_strarrdup(env);
 	msh_read();
 	ft_strstrdel(&g_environ_vars);
 	return (0);
