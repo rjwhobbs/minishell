@@ -1,6 +1,6 @@
 #include "../includes/mini.h"
 
-void	print_env(char **ep)
+static void	print_env(char **ep)
 {
 	int	i;
 
@@ -9,25 +9,12 @@ void	print_env(char **ep)
 		ft_putendl(ep[i++]);
 }
 
-int		run_exec(char **args)
+static int		run(char **args)
 {
 	char	*path;
 	pid_t	pid;
 	int		status;
 
-	if (!args || !*args || !**args)
-		return (1);
-	if (ft_strcmp(*args, "exit") == 0)
-		return (0);
-	else if (ft_strcmp(*args, "env") == 0)
-	{
-		print_env(g_environ_vars);
-		return (1);
-	}
-	// else if (ft_strcmp(*args, "setenv") == 0)
-	//  	return (ft_setenv(env));
-	else if (ft_strcmp(*args, "cd") == 0)
-		return (ft_cd(args[1]));
 	status = 1;
 	if (!(path = param_search(g_environ_vars, "PATH", args[0], SEARCH_ON)))
 		path = args[0];
@@ -46,12 +33,30 @@ int		run_exec(char **args)
 		waitpid(pid, &status, WUNTRACED);
 		if (WIFEXITED(status) || WIFSIGNALED(status))
 			break ;
-		// wait(NULL);
 	}
 	return (1);
 }
 
-void	msh_read(void)
+static int		run_exec(char **args)
+{
+	if (!args || !*args || !**args)
+		return (1);
+	if (ft_strcmp(*args, "exit") == 0)
+		return (0);
+	else if (ft_strcmp(*args, "env") == 0)
+	{
+		print_env(g_environ_vars);
+		return (1);
+	}
+	// else if (ft_strcmp(*args, "setenv") == 0)
+	//  	return (ft_setenv(env));
+	else if (ft_strcmp(*args, "cd") == 0)
+		return (ft_cd(args[1]));
+	else
+		return (run(args));
+}
+
+static void	msh_read(void)
 {
 	char	*input;
 	char	**args;
