@@ -9,17 +9,15 @@ static void	print_env(char **ep)
 		ft_putendl(ep[i++]);
 }
 
-static int		run(char **args)
+static int		run(char **args, int status)
 {
 	char	*path;
 	pid_t	pid;
-	int		status;
 
-	status = 1;
 	if (!(path = param_search(g_environ_vars, "PATH", args[0], SEARCH_ON)))
 		path = args[0];
 	else
-		path = ft_strrealloc(path, args[0]);
+		path = ft_strrealloc(path, args[0]); //How are we gonna free path if this happens?
 	pid = fork();
 	if (pid == 0)
 	{
@@ -39,6 +37,9 @@ static int		run(char **args)
 
 static int		run_exec(char **args)
 {
+	int		status;
+
+	status = 1;
 	if (!args || !*args || !**args)
 		return (1);
 	if (ft_strcmp(*args, "exit") == 0)
@@ -53,7 +54,7 @@ static int		run_exec(char **args)
 	else if (ft_strcmp(*args, "cd") == 0)
 		return (ft_cd(args[1]));
 	else
-		return (run(args));
+		return (run(args, status));
 }
 
 static void	msh_read(void)
