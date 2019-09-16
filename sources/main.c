@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/mini.h"
+#include <signal.h>
 
 static void	getpath(char **args, char **path)
 {
@@ -100,10 +101,19 @@ static void	msh_read(void)
 	}
 }
 
+// void		handler(int sig)
+// {
+// 	//ft_putstr("Signal detected:  ");
+// 	//ft_putnbr(sig);
+// 	// ft_nl();
+// 	// msh_read();
+// 	sig = 0;
+// }
 int			main(int ac, char *av[], char *env[])
 {
 	(void)ac;
 	(void)av;
+	//signal(SIGINT, handler);
 	g_env = ft_strarrdup(env);
 	msh_read();
 	ft_strstrdel(&g_env);
