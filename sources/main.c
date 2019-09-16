@@ -1,4 +1,5 @@
 #include "../includes/mini.h"
+#include <stdio.h>
 
 static int	print_env(char **ep)
 {
@@ -10,15 +11,30 @@ static int	print_env(char **ep)
 	return (1);
 }
 
+static void getpath(char **args, char **path)
+{
+	char *tmp;
+
+	if (!(tmp = param_search(g_environ_vars, "PATH", args[0], SEARCH_ON)))
+	{
+			*path = args[0];
+			return ;
+	}
+	else
+		tmp = ft_strrealloc(tmp, args[0]);
+	ft_strcpy(*path, tmp);
+	free(tmp);
+}
+
 static int		run(char **args, int status)
 {
-	char	*path;
+	char	tmp_path[PATH_MAX];
 	pid_t	pid;
+	char	*path;
+ 
 
-	if (!(path = param_search(g_environ_vars, "PATH", args[0], SEARCH_ON)))
-		path = args[0];
-	else
-		path = ft_strrealloc(path, args[0]); //How are we gonna free path if this happens?
+	path = tmp_path;
+	getpath(args, &path);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -54,6 +70,19 @@ static int		setenv_checker(char **args)
 	return (1);
 }
 
+int				ft_echo(char **args)
+{
+	args++;
+	while (*args)
+	{
+		ft_putstr(*args++);
+		if (*args)
+			ft_putchar(' ');
+	}
+	ft_nl();
+	return (1);
+}
+
 static int		run_exec(char **args)
 {
 	int		status;
@@ -71,6 +100,8 @@ static int		run_exec(char **args)
 		return (ft_cd(args[1]));
 	else if (ft_strcmp(*args, "unsetenv") == 0)
 		return(unsetenv_checker(args));
+	else if (ft_strcmp(*args, "echo") == 0)
+		return(ft_echo(args));
 	else
 		return (run(args, status));
 }
@@ -110,5 +141,6 @@ int		main(int ac, char *av[], char *env[])
 		g_environ_vars = ft_strarrdup(env);
 	msh_read();
 	ft_strstrdel(&g_environ_vars);
+	//sleep(20);
 	return (0);
 }

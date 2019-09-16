@@ -30,7 +30,7 @@ static void	ft_rmchr_on_steroids(char *p)
 
 static void		qoute_checker(char **input, char *f)
 {
-	while (**input && !(**input == ' ' && *f == 0))
+	while (**input && !(ft_isspace(**input) && *f == 0))
 	{		
 		if (**input == '\'' || **input == '"')
 		{
@@ -75,7 +75,7 @@ static void 	checker(char **args, char *input, char *f)
 			tilde_expander(&args[i]);
 		ft_rmchr_on_steroids(args[i]);
 		i++;
-		while (*input == ' ')
+		while (ft_isspace(*input))
 			input++;
 	}
 	args[i] = NULL;
@@ -91,6 +91,7 @@ char	**parser(char *input)
 	i = 0;
 	if (!input || !*input)
 		return (NULL);
+	// white space deleter here;
 	if (!(args = (char**)malloc(sizeof(char*) * (ARG_MAX))))
 	{
 		mini_error(ME_MEMERR, NONFATAL_ME);
