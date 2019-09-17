@@ -22,6 +22,10 @@
 # define SEARCH_ON	01
 # define SEARCH_VAL	02
 
+# ifndef ARG_MAX
+#  define ARG_MAX (256 * 1024)
+# endif
+
 char		**g_env;
 
 char		*param_search(char **env, char *env_var, char *arg, int flag);
