@@ -95,10 +95,8 @@ char		**parser(char *input)
 {
 	char	**args;
 	char	f;
-	int		i;
 
 	f = 0;
-	i = 0;
 	if (!input || !*input)
 		return (NULL);
 	if (!(args = (char**)malloc(sizeof(char*) * (ARG_MAX))))
