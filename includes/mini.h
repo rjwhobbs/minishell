@@ -16,6 +16,7 @@
 # include "mini_errors.h"
 # include <dirent.h>
 # include <limits.h>
+# include <sys/wait.h>
 
 # define SEARCH_OFF	0
 # define SEARCH_ON	01
