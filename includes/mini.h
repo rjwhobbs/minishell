@@ -16,10 +16,15 @@
 # include "mini_errors.h"
 # include <dirent.h>
 # include <limits.h>
+# include <sys/wait.h>
 
 # define SEARCH_OFF	0
 # define SEARCH_ON	01
 # define SEARCH_VAL	02
+
+# ifndef ARG_MAX
+#  define ARG_MAX (256 * 1024)
+# endif
 
 char		**g_env;
 
@@ -37,5 +42,7 @@ int			unsetenv_checker(char **args);
 int			setenv_checker(char **args);
 int			ft_echo(char **args);
 int			print_env(char **ep);
+int			access_control(char *str);
+int			access_control_f(char *str);
 
 #endif

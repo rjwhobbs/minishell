@@ -6,7 +6,7 @@
 /*   By: wasahmed <wasahmed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 15:11:47 by wasahmed          #+#    #+#             */
-/*   Updated: 2019/09/16 15:36:08 by wasahmed         ###   ########.fr       */
+/*   Updated: 2019/09/17 09:40:09 by rhobbs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,23 @@ static int	run(char **args, int status)
 
 	path = tmp_path;
 	getpath(args, &path);
+	if (!access_control(path))
+		return (1);
 	pid = fork();
 	if (pid == 0)
 	{
 		execve(path, args, g_env);
 		ft_putstr("Error opening: ");
 		ft_putendl(*args);
-		return (0);
+		exit (EXIT_FAILURE);
 	}
-	while (status)
-	{
-		waitpid(pid, &status, WUNTRACED);
-		if (WIFEXITED(status) || WIFSIGNALED(status))
-			break ;
-	}
+	// while (status)
+	// {
+	//waitpid(pid, &status, WUNTRACED);
+	// 	if (WIFEXITED(status) || WIFSIGNALED(status))
+	// 		break ;
+	// }
+	wait(&status);
 	return (1);
 }
 

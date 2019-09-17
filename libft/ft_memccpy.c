@@ -30,7 +30,7 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 		else if (psrc[i] == (unsigned char)c)
 		{
 			pdst[i] = psrc[i];
-			return (&dst[i + 1]);
+			return (&pdst[i + 1]);
 		}
 		i++;
 	}
