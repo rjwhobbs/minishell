@@ -35,6 +35,8 @@ static int	run(char **args, int status)
 
 	path = tmp_path;
 	getpath(args, &path);
+	if (!access_control(path))
+		return (1);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -73,6 +75,7 @@ static int	run_exec(char **args)
 		return (ft_echo(args));
 	else
 		return (run(args, status));
+	
 }
 
 static void	msh_read(void)

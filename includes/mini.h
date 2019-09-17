@@ -42,5 +42,7 @@ int			unsetenv_checker(char **args);
 int			setenv_checker(char **args);
 int			ft_echo(char **args);
 int			print_env(char **ep);
+int			access_control(char *str);
+int			access_control_f(char *str);
 
 #endif

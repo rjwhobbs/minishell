@@ -29,6 +29,8 @@ int		ft_cd(char *path)
 		path = param_search(g_env, "OLDPWD", NULL, SEARCH_VAL);
 		freeme = 1;
 	}
+	if (!access_control_f(path))
+		return (1);
 	getcwd(oldpwd, PATH_MAX);
 	ft_setenv("OLDPWD", oldpwd, ft_strlen("OLDPWD"), ft_strlen(oldpwd));
 	chdir(path);
