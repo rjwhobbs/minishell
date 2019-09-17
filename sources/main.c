@@ -6,7 +6,7 @@
 /*   By: wasahmed <wasahmed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 15:11:47 by wasahmed          #+#    #+#             */
-/*   Updated: 2019/09/16 15:36:08 by wasahmed         ###   ########.fr       */
+/*   Updated: 2019/09/17 09:40:09 by rhobbs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ static int	run_exec(char **args)
 		return (ft_echo(args));
 	else
 		return (run(args, status));
-	
 }
 
 static void	msh_read(void)
