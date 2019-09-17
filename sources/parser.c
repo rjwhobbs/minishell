@@ -18,7 +18,7 @@ static void	ft_rmchr_on_steroids(char *p)
 	int		i;
 
 	f = 0;
-	while (p && *p)
+	while (p && *p) //?
 	{
 		i = 0;
 		while (*p && *p != '"' && *p != '\'')
@@ -40,7 +40,7 @@ static void	ft_rmchr_on_steroids(char *p)
 
 static void	qoute_checker(char **input, char *f)
 {
-	while (**input && !(ft_isspace(**input) && *f == 0))
+	while (**input && !(ft_isspace(**input) && *f == 0))  //???
 	{
 		if (**input == '\'' || **input == '"')
 		{
@@ -76,7 +76,7 @@ static void	checker(char **args, char *input, char *f)
 		ip = input;
 		qoute_checker(&input, f);
 		op = input;
-		if (!(args[i] = ft_strsub(ip, 0, op - ip)))
+		if (!(args[i] = ft_strsub(ip, 0, op - ip)))  // is ip the whole string or just 1st char
 		{
 			mini_arr_error(ME_MEMERR, &args, NONFATAL_ME);
 			return ;
@@ -97,7 +97,7 @@ char		**parser(char *input)
 	char	f;
 
 	f = 0;
-	if (!input || !*input)
+	if (!input || !*input)  //!*input ?
 		return (NULL);
 	if (!(args = (char**)malloc(sizeof(char*) * (ARG_MAX))))
 	{

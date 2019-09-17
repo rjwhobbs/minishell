@@ -30,7 +30,7 @@ all: $(NAME)
 
 $(NAME):
 	#@make -C libft/ libft.a
-	gcc $(FLAGS) -c $(SRC)
+	gcc $(FLAGS) -c $(SRC) -g
 	gcc $(FLAGS) $(OBJ) $(LIB) -o $(NAME)
 
 #libft:

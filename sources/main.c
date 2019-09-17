@@ -43,14 +43,15 @@ static int	run(char **args, int status)
 		execve(path, args, g_env);
 		ft_putstr("Error opening: ");
 		ft_putendl(*args);
-		return (0);
+		exit (EXIT_FAILURE);
 	}
-	while (status)
-	{
-		waitpid(pid, &status, WUNTRACED);
-		if (WIFEXITED(status) || WIFSIGNALED(status))
-			break ;
-	}
+	// while (status)
+	// {
+	//waitpid(pid, &status, WUNTRACED);
+	// 	if (WIFEXITED(status) || WIFSIGNALED(status))
+	// 		break ;
+	// }
+	wait(&status);
 	return (1);
 }
 

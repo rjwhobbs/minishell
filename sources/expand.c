@@ -62,7 +62,7 @@ static void	expand_checker(char **str)
 
 void		expand(char **args)
 {
-	if (!args || !*args || !**args)
+	if (!args || !*args || !**args) // ??
 		return ;
 	if (args[1])
 		args++;

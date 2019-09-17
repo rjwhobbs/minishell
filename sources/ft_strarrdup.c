@@ -28,3 +28,4 @@ char	**ft_strarrdup(char **arr)
 		*dup++ = ft_strdup(*arr++);
 	return (dup_z);
 }
+// dup_z?
