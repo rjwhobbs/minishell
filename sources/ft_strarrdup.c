@@ -6,7 +6,7 @@
 /*   By: wasahmed <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 14:25:31 by wasahmed          #+#    #+#             */
-/*   Updated: 2019/09/16 14:28:39 by wasahmed         ###   ########.fr       */
+/*   Updated: 2019/09/18 14:50:36 by rhobbs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,3 @@ char	**ft_strarrdup(char **arr)
 		*dup++ = ft_strdup(*arr++);
 	return (dup_z);
 }
-// dup_z?

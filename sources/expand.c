@@ -6,7 +6,7 @@
 /*   By: wasahmed <wasahmed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 14:34:04 by wasahmed          #+#    #+#             */
-/*   Updated: 2019/09/16 14:42:45 by wasahmed         ###   ########.fr       */
+/*   Updated: 2019/09/18 14:54:32 by rhobbs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	expand_checker(char **str)
 
 void		expand(char **args)
 {
-	if (!args || !*args || !**args) // ??
+	if (!args || !*args || !**args)
 		return ;
 	if (args[1])
 		args++;

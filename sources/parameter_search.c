@@ -43,7 +43,7 @@ static char	*path_search(char *arg, char *start, char *end)
 	char	*path;
 
 	if ((path = bin_search(start, arg, end - start)))
-		return (ft_strdup(path));
+		return (path);
 	while (!path)
 	{
 		start = end;

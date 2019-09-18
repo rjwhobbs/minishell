@@ -6,7 +6,7 @@
 /*   By: wasahmed <wasahmed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 15:11:47 by wasahmed          #+#    #+#             */
-/*   Updated: 2019/09/17 09:40:09 by rhobbs           ###   ########.fr       */
+/*   Updated: 2019/09/18 14:51:10 by rhobbs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	run(char **args, int status)
 		execve(path, args, g_env);
 		ft_putstr("Error opening: ");
 		ft_putendl(*args);
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	// while (status)
 	// {
