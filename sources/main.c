@@ -45,12 +45,6 @@ static int	run(char **args, int status)
 		ft_putendl(*args);
 		exit(EXIT_FAILURE);
 	}
-	// while (status)
-	// {
-	//waitpid(pid, &status, WUNTRACED);
-	// 	if (WIFEXITED(status) || WIFSIGNALED(status))
-	// 		break ;
-	// }
 	wait(&status);
 	return (1);
 }
